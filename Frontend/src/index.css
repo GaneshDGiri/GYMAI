@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- 1. Define Colors --- */
+  --color-gym-dark: #0f172a;
+  --color-gym-card: #1e293b;
+  --color-gym-accent: #10b981;
+  --color-gym-blue: #3b82f6;
+
+  /* --- 2. Define Animation Utilities --- */
+  /* This links the keyframes below to actual class names like 'animate-blob' */
+  --animate-fade-in: fadeIn 0.5s ease-out forwards;
+  --animate-blob: blob 7s infinite;
+
+  /* --- 3. Define Keyframes --- */
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+  
+  /* --- 4. Define Fonts --- */
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* --- Base Layer Styles --- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    /* Apply the dark theme background and text color globally */
+    background-color: var(--color-gym-dark);
+    color: #e2e8f0; /* slate-200 */
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-gym-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gym-card);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gym-accent);
+}
