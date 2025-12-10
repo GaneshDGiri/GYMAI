@@ -1,13 +1,18 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api'; // Your Node Server Port
+// ❌ COMMENT THIS OUT (Localhost won't work on Vercel)
+// const BASE_URL = 'http://localhost:5000/api';
 
-export const generateWorkout = async (goal, level) => {
-  try {
-    const response = await axios.post(`${API_URL}/generate-workout`, { goal, level });
-    return response.data;
-  } catch (error) {
-    console.error("API Error:", error);
-    return null;
-  }
-};
+// ✅ UNCOMMENT & USE YOUR NEW RENDER URL:
+const BASE_URL = 'https://gymai2.onrender.com/api'; 
+
+const api = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// ... rest of the file
+
+export default api;
