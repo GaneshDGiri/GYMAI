@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-// ❌ COMMENT THIS OUT (Localhost won't work on Vercel)
-// const BASE_URL = 'http://localhost:5000/api';
+// --- CONFIGURATION ---
+// ✅ UNCOMMENT THIS FOR LOCAL TESTING:
+const BASE_URL = 'http://localhost:5000/api';
 
-// ✅ UNCOMMENT & USE YOUR NEW RENDER URL:
-const BASE_URL = 'https://gymai2.onrender.com/api'; 
+// ❌ COMMENT THIS OUT (Until you deploy backend to Render/Railway):
+// const BASE_URL = 'https://your-app.onrender.com/api';
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -13,6 +14,11 @@ const api = axios.create({
   },
 });
 
-// ... rest of the file
+// Helper to auto-add token
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) config.headers['x-auth-token'] = token;
+    return config;
+});
 
 export default api;
